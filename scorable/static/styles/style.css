@@ -1,0 +1,112 @@
+html { 
+    height:100%;
+}
+
+body {
+	/*background-image: url("background.jpg");*/
+	/*background: #53d3d1;*/
+	background: rgba(255, 255, 255, 0.3) url('/static/images/background2.jpg') 0 0 no-repeat fixed;
+	background-color: rgba(255, 255, 255, 0.5);
+	background-size: cover;
+}
+
+/*content*/
+#wrapper-cam {
+	right: 0;
+	top: 71px;
+	position: fixed;
+	width: 200px;
+	height: 200px;
+}
+
+#wrapper {
+	padding: 50px 0;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#content {
+	margin: 80px;
+	margin-top: 130px;
+	padding: 30px;
+	font-family: Helvetica;
+	font-size: 30px;
+	color: #002447;
+}
+
+#files {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#files + label {
+	width: 97%;
+	padding: 0.9em;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: white;
+    background-color: #002447;
+    display: inline-block;
+}
+
+#files:focus + label,
+#files + label:hover {
+	position: fixed;
+	transition-duration: 0.2s;
+    background-color: #FEB249;
+    cursor: pointer;
+}
+
+#demo_button {
+	overflow: hidden;
+	padding: 0.9em;
+	display: inline-block;
+	font-size: 0.8em;
+	font-weight: 700;
+	color: white;
+	background-color: #FEB249;
+	border: none;
+    outline:none;
+}
+
+#demo_button:hover {
+	transition-duration: 0.2s;
+	color: #000;
+    background-color: #FBECEB;
+    cursor: pointer;
+}
+
+#box {
+	margin-top: 300px;
+	height: 30em;
+	width: 43em;
+	border: solid;
+	border-width: 3px;
+}
+
+	  	
+#wrapper-demo {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+	height: 3000px;
+}
+
+#content-demo {
+	font-family: Helvetica;
+	font-size: 30px;
+	color: #002447;
+}

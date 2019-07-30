@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="/static/styles/style.css">
+	<style>
+	  	.thumb {
+	  		display: block;
+			margin-left: auto;
+		    margin-right: auto;
+		    width: 100%;
+		  	/*object-fit: cover;*/
+		}
+	</style>
+
+</head>
+<body>
+	<div id="wrapper-demo">
+		<div id="wrapper-cam">
+			<video id="vid" autoplay width="200"></video>
+		</div>
+		<div id="content-demo">
+			<input type="file" id="files" name="files[]" multiple />
+			<label for="files">Add a file</label>
+			<output id="list"></output>
+			<script type="text/javascript" src="/static/scripts/jquery-3.4.1.min.js"></script>
+			<script type="text/javascript" src="/static/scripts/adapter/adapter_core.js"></script>
+			<script type="text/javascript" src="/static/scripts/photo.js"></script>
+			<script>
+			  function handleFileSelect(evt) {
+			    var files = evt.target.files; // FileList object
+
+			    // Loop through the FileList and render image files as thumbnails.
+			    for (var i = 0, f; f = files[i]; i++) {
+
+			      // Only process image files.
+			      if (!f.type.match('image.*')) {
+			        continue;
+			      }
+
+			      var reader = new FileReader();
+
+			      // Closure to capture the file information.
+			      reader.onload = (function(theFile) {
+			        return function(e) {
+			          // Render thumbnail.
+			          var span = document.createElement('span');
+			          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+			                            '" title="', escape(theFile.name), '"/>'].join('');
+			          document.getElementById('list').insertBefore(span, null);
+			        };
+			      })(f);
+
+			      // Read in the image file as a data URL.
+			      reader.readAsDataURL(f);
+			    }
+			  }
+
+			  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+			</script>
+		</div>
+	</div>
+</body>
+</html>
