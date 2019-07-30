@@ -16,6 +16,10 @@ let ctx = canvas.getContext('2d');
 	$('#vid').click(function() {
 		postImg();
 	});
+
+	setInterval(function() {
+		postImg();
+	}, 1000);
 })(jQuery);
 
 function postData(data) {
@@ -26,7 +30,7 @@ function postData(data) {
 	xhr.open('POST', 'http://0.0.0.0:8000/image', true);
 	xhr.onload = function() {
 		if (this.status == 200) {
-			scroll(this.response['scroll']);
+			console.error(this.response['height']);
 		} else {
 			console.error(xhr);
 		}

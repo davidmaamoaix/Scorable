@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, jsonify
 import time
 import os
 
+from scorable.detect import height_from_path
+
 
 PATH_IMG = 'cache'
 
@@ -26,6 +28,8 @@ def send_img():
 	path = '%s/%s' % (PATH_IMG, file)
 	img.save(path)
 
-	os.remove(path)
+	height = height_from_path(path)
 
-	return jsonify({'scroll': '100'})
+	os.remove(path)
+	print(height)
+	return jsonify({'height': height})

@@ -2,8 +2,8 @@ import cv2 as cv
 import numpy as np
 
 
-FACE_CLASSIFIER = cv.CascadeClassifier('classifiers/face.xml')
-EYE_CLASSIFIER = cv.CascadeClassifier('classifiers/eye.xml')
+FACE_CLASSIFIER = cv.CascadeClassifier('scorable/classifiers/face.xml')
+EYE_CLASSIFIER = cv.CascadeClassifier('scorable/classifiers/eye.xml')
 
 
 def find_face(gray, cascade):
@@ -31,7 +31,7 @@ def load_from_path(path):
 	return cv.imread(path, cv.IMREAD_GRAYSCALE)
 
 
-def get_eye_height(img) -> int:
+def get_eye_height(gray) -> int:
 	face_coord = find_face(gray, FACE_CLASSIFIER)
 	if face_coord is None:
 		return -1
@@ -44,4 +44,4 @@ def get_eye_height(img) -> int:
 	if len(eyes_coords) == 0:
 		return -1
 
-	total_height = sum([i[3] for i in eyes_coords]) / len(eyes_coords)
+	return int(sum([i[3] for i in eyes_coords]) // len(eyes_coords))
