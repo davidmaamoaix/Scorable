@@ -56,11 +56,11 @@ body {
     color: white;
     background-color: #002447;
     display: inline-block;
+	position: fixed;
 }
 
 #files:focus + label,
 #files + label:hover {
-	position: fixed;
 	transition-duration: 0.2s;
     background-color: #FEB249;
     cursor: pointer;
@@ -109,4 +109,24 @@ body {
 	font-family: Helvetica;
 	font-size: 30px;
 	color: #002447;
+}
+
+#cali {
+	width: 10%;
+	bottom: 0;
+	padding: 1%;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: white;
+    background-color: #002447;
+    display: inline-block;
+    border: none;
+    position:fixed;
+}
+
+#cali:hover {
+	transition-duration: 0.2s;
+	color: #000;
+    background-color: #FBECEB;
+    cursor: pointer;
 }
