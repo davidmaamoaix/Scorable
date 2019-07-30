@@ -6,6 +6,11 @@ let v = $('#vid').get(0);
 let canvas = document.createElement('canvas');
 let ctx = canvas.getContext('2d');
 
+var disable = false;
+var prev = -1;
+var midPos;
+var accumulate;
+
 (function($) {
 	$(document).ready(function() {
 		navigator.mediaDevices.getUserMedia(constraints)
@@ -19,7 +24,7 @@ let ctx = canvas.getContext('2d');
 
 	setInterval(function() {
 		postImg();
-	}, 1000);
+	}, 200);
 })(jQuery);
 
 function postData(data) {
@@ -30,7 +35,22 @@ function postData(data) {
 	xhr.open('POST', 'http://0.0.0.0:8000/image', true);
 	xhr.onload = function() {
 		if (this.status == 200) {
-			console.error(this.response['height']);
+			var curr = this.response['height'];
+			if (!disable) {
+				if (curr != -1) {
+					if (curr < midPos) {
+						if (accumulate >= 2) {
+							scroll(150);
+						} else {
+							accumulate++;
+						}
+					} else {
+						accumulate = 0;
+					}
+				}
+			}
+			console.log(curr);
+			prev = curr;
 		} else {
 			console.error(xhr);
 		}
@@ -48,5 +68,17 @@ function postImg() {
 
 function scroll(amount) {
 	var curr = $(document).scrollTop();
-	$('html, body').animate({scrollTop: curr + parseInt(amount)}, 'medium');
+	console.log('scroll');
+	$('html, body').animate({scrollTop: curr + parseInt(amount)}, 'fast');
+}
+
+function calibrate() {
+	disable = true;
+	if (prev == -1) {
+		alert('Calibration failed.');
+	} else {
+		alert('Success:' + prev);
+	}
+	midPos = prev;
+	disable = false;
 }
