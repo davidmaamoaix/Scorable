@@ -4,6 +4,7 @@ import numpy as np
 
 FACE_CLASSIFIER = cv.CascadeClassifier('scorable/classifiers/face.xml')
 EYE_CLASSIFIER = cv.CascadeClassifier('scorable/classifiers/eye.xml')
+THRESHOLD = 48
 
 
 def find_face(gray, cascade):
@@ -44,4 +45,21 @@ def get_eye_height(gray) -> int:
 	if len(eyes_coords) == 0:
 		return -1
 
-	return int(sum([i[3] for i in eyes_coords]) // len(eyes_coords))
+	height = []
+	for x, y, w, h in eyes_coords:
+		interval = []
+		for mid in range(x, x + w):
+			dark = False
+			for i in range(y, y + h):
+				color = face[i, mid]
+				if color < THRESHOLD:
+					if dark:
+						interval[-1] += 1
+					else:
+						dark = True
+						interval.append(1)
+				else:
+					dark = False
+		height.append(max(interval) / h)
+
+	return sum(height) / len(height)
