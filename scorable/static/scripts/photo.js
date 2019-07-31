@@ -40,7 +40,7 @@ function postData(data) {
 				if (curr != -1) {
 					if (curr < midPos) {
 						if (accumulate >= 2) {
-							scroll(150);
+							scroll(50);
 						} else {
 							accumulate++;
 						}
